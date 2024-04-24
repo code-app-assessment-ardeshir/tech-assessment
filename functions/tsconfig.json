@@ -11,6 +11,6 @@
     "typeRoots": ["./typings", "./node_modules/@types"],
     "resolveJsonModule": true
   },
-  "include": ["./src/index.js", "./src/**/*"],
+  "include": ["./src/index.js", "./src/**/*", "tests"],
   "exclude": ["./build/*", "./keys/*", "./typings"]
 }
