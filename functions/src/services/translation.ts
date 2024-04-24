@@ -16,10 +16,15 @@ export function loadTranslations(language: string): Translations {
   }
 
   const filePath = path.join(__dirname, `../locales/${language}.json`)
-  const fileContents = fs.readFileSync(filePath, 'utf8') // avoid this for large files
+  let fileContents
+  try {
+    fileContents = fs.readFileSync(filePath, 'utf8') // for larger files better to use async readFile
+  } catch (error) {
+    fileContents = fs.readFileSync(path.join(__dirname, '../locales/en.json'), 'utf8')
+  }
   const translations: Translations = JSON.parse(fileContents)
-
   translationsCache[language] = translations
+
   return translations
 }
 

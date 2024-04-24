@@ -1,5 +1,9 @@
 import request from 'supertest'
-import app from '../src/index'
+import app, { server } from '../src/index'
+
+afterAll((done) => {
+  server.close(done)
+});
 
 describe('/get-label endpoint', () => {
   it('should create a PDF and return it as a response', async () => {
@@ -22,14 +26,13 @@ describe('/get-label endpoint', () => {
     
     expect(Buffer.isBuffer(response.body)).toBeTruthy()
 
-    // Optionally, check if the PDF starts with the PDF header
     expect(response.body.toString('ascii', 0, 5)).toEqual('%PDF-')
   })
 
   it('should handle invalid input with an appropriate error message', async () => {
     const response = await request(app)
       .post('/get-label')
-      .send({}) // Sending an empty body or invalid data
+      .send({})
       .expect('Content-Type', /json/)
       .expect(400)
 
@@ -47,7 +50,7 @@ describe('/get-label endpoint', () => {
       .expect(400)
 
     expect(response.body.error).toBeDefined()
-    expect(response.body.error).toContain('return_address is required')
+    expect(response.body.error).toContain('some fields are missing')
   })
 
 })

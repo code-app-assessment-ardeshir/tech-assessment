@@ -10,13 +10,12 @@ import { ILabel } from "../interfaces/label";
  */
 export const shippingLabel = async (req: express.Request, res: express.Response) => {
   try {
-    const pdfBuffer = await pdf.generate(req.body as ILabel);
+    const pdfBuffer = await pdf.generate(req.body as ILabel)
 
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename=label-${req.body.order}.pdf`);
-    res.send(pdfBuffer);
+    res.setHeader('Content-Type', 'application/pdf')
+    res.setHeader('Content-Disposition', `attachment; filename=label-${req.body.order}.pdf`)
+    res.send(pdfBuffer)
   } catch (error) {
-    console.error('Error generating PDF', error);
-    res.status(500).send('Error generating PDF');
+    res.status(500).send('Error generating PDF')
   }
 }

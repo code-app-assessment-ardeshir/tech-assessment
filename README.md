@@ -48,3 +48,6 @@ Payload:
 * Use `npm i` or equivalent to install all the package 
 * Run `npm run start` to start the server
 * You should see `Hello world!` when you open your browser with the URL `https://localhost:3000`
+
+## Example output
+check label-en.pdf and label-nl.pdf for the output

@@ -1,36 +1,34 @@
 import { t } from "../src/services/translation"
 
 jest.mock('../src/locales/en.json', () => ({
-    postage_required: "POSTAGE REQUIRED",
-    // ... other strings
+  POSTAGE_REQUIRED: "POSTAGE REQUIRED",
   }), { virtual: true })
   
-  jest.mock('../src/locales/fr.json', () => ({
-    postage_required: "AFFRANCHISSEMENT NÉCESSAIRE",
-    // ... other strings
+  jest.mock('../src/locales/nl.json', () => ({
+    POSTAGE_REQUIRED: "PORT VEREIST",
   }), { virtual: true })
   
 describe('Translation functionality', () => {
   it('should retrieve the correct English translation', () => {
-    const key = 'postage_required'
+    const key = 'POSTAGE_REQUIRED'
     const translation = t(key, 'en')
     expect(translation).toBe('POSTAGE REQUIRED')
   })
 
-  it('should retrieve the correct French translation', () => {
-    const key = 'postage_required'
-    const translation = t(key, 'fr')
-    expect(translation).toBe('AFFRANCHISSEMENT NÉCESSAIRE')
+  it('should retrieve the correct Dutch translation', () => {
+    const key = 'POSTAGE_REQUIRED'
+    const translation = t(key, 'nl')
+    expect(translation).toBe('PORT VEREIST')
   })
 
   it('should fall back to English translation if language is not supported', () => {
-    const key = 'postage_required'
-    const translation = t(key, 'es') // Assume Spanish is not supported
+    const key = 'POSTAGE_REQUIRED'
+    const translation = t(key, 'es')
     expect(translation).toBe('POSTAGE REQUIRED')
   })
 
   it('should fall back to the key if translation is missing', () => {
-    const key = 'non_existent_key'
+    const key = 'none_existing_key' as any
     const translation = t(key, 'en')
     expect(translation).toBe(key)
   })
