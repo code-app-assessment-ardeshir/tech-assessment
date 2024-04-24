@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-
 import translations from '../locales/en.json';
 
 export type TranslationKeys = keyof typeof translations;
